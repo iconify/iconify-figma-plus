@@ -7,6 +7,6 @@
   "description": "Import MDI, FontAwesome, Jam, EmojiOne and many other icons to Figma document.",
   "instructions": "1. Browse Plugins menu 2. Click 'Iconify'",
   "js": [
-    "index.js"
+    "dist/plugin.js"
   ]
 }
