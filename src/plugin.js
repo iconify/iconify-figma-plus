@@ -337,33 +337,33 @@
                 default:
                     parent = parent.parent;
             }
-
-        }
-        if (!parent) {
-            parent = figma.currentPage;
         }
 
         // Move icon to middle of selected group
-        if (lastParent === null || lastParent.node !== parent) {
-            lastParent = {
-                node: parent,
-                offset: 0
-            };
+        console.log('Iconify debug: moving icon to middle of selected group');
+        if (parent && parent.type !== 'PAGE' && parent !== node.parent) {
+            if (!lastParent || lastParent.node !== parent) {
+                lastParent = {
+                    node: parent,
+                    offset: 0
+                };
+            }
+
+            // Move to top left corner
+            node.x = parent ? parent.x : 0;
+            node.y = parent ? parent.y : 0;
+
+            if (parent.width > node.width) {
+                x = Math.floor(parent.width / 2 - node.width);
+                x += lastParent.offset;
+                node.x += x;
+                lastParent.offset += node.width;
+            }
+
+            // Change parent node
+            console.log('Iconify debug: changing parent node');
+            parent.insertChild(parent.children.length, node);
         }
-
-        // Move to top left corner
-        node.x = parent.x;
-        node.y = parent.y;
-
-        if (parent.width > node.width) {
-            x = Math.floor(parent.width / 2 - node.width);
-            x += lastParent.offset;
-            node.x += x;
-            lastParent.offset += node.width;
-        }
-
-        // Change parent node
-        parent.insertChild(parent.children.length, node);
 
         // Select node
         console.log('Iconify debug: changing selection');
@@ -473,6 +473,18 @@
             window.setTimeout(function() {
                 window.setTimeout(openWindow, 0);
             }, 0);
+        },
+        shortcut: {
+            mac: {
+                option: true,
+                shift: true,
+                key: 'i'
+            },
+            windows: {
+                alt: true,
+                shift: true,
+                key: 'i'
+            }
         }
     });
 
