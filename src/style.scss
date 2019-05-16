@@ -1,3 +1,10 @@
+.iconify-modal {
+  background: #f2f2f2;
+  .modal-header {
+    background: #fff;
+  }
+}
+
 .iconify-modal-content {
   user-select: none;
   cursor: default;
@@ -6,8 +13,7 @@
   width: 100%;
   max-height: calc(100% - 36px);
   overflow: auto;
-  background: #f2f2f2;
-  padding: 8px 16px;
+  padding: 16px;
 
   svg {
     display: inline-block;

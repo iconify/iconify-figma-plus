@@ -187,7 +187,7 @@
         // Show "Loading" window
         figmaPlus.showUI({
             title: plugin.title,
-            html: '<div id="' + id + '" class="iconify-modal" style="padding: 64px 32px; text-align: center;">Loading...</div>',
+            html: '<div id="' + id + '" style="padding: 64px 32px; text-align: center;">Loading...</div>',
             width: 800,
             height: 800,
             padding: false
@@ -235,11 +235,17 @@
 
         // Replace modal-content class with iconify-modal-content in parent node because
         // modal-content includes styles for child nodes that break layout
+        // Also add iconify-modal to parent node
         node = container.parentNode;
         while (node = node.parentNode) {
             if (node && node.classList && node.classList.contains('modal-content')) {
                 node.classList.remove('modal-content');
                 node.classList.add('iconify-modal-content');
+
+                node = node.parentNode;
+                if (node && node.classList) {
+                    node.classList.add('iconify-modal');
+                }
                 break;
             }
         }

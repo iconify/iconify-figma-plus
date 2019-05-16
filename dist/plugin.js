@@ -20,7 +20,7 @@
                     'https://code.iconify.design/search/1/1.0.3/style.css'
                 ],
                 styles: [
-                    ".iconify-modal-content {\n  user-select: none;\n  cursor: default;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  max-height: calc(100% - 36px);\n  overflow: auto;\n  background: #f2f2f2;\n  padding: 8px 16px; }\n  .iconify-modal-content svg {\n    display: inline-block; }\n  .iconify-modal-content a, .iconify-modal-content button {\n    cursor: pointer; }\n  .iconify-modal-content input, .iconify-modal-content textarea {\n    cursor: text; }\n"
+                    ".iconify-modal {\n  background: #f2f2f2; }\n  .iconify-modal .modal-header {\n    background: #fff; }\n\n.iconify-modal-content {\n  user-select: none;\n  cursor: default;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  max-height: calc(100% - 36px);\n  overflow: auto;\n  padding: 16px; }\n  .iconify-modal-content svg {\n    display: inline-block; }\n  .iconify-modal-content a, .iconify-modal-content button {\n    cursor: pointer; }\n  .iconify-modal-content input, .iconify-modal-content textarea {\n    cursor: text; }\n"
                 ]
             },
             options: {
@@ -187,7 +187,7 @@
         // Show "Loading" window
         figmaPlus.showUI({
             title: plugin.title,
-            html: '<div id="' + id + '" class="iconify-modal" style="padding: 64px 32px; text-align: center;">Loading...</div>',
+            html: '<div id="' + id + '" style="padding: 64px 32px; text-align: center;">Loading...</div>',
             width: 800,
             height: 800,
             padding: false
@@ -235,11 +235,17 @@
 
         // Replace modal-content class with iconify-modal-content in parent node because
         // modal-content includes styles for child nodes that break layout
+        // Also add iconify-modal to parent node
         node = container.parentNode;
         while (node = node.parentNode) {
             if (node && node.classList && node.classList.contains('modal-content')) {
                 node.classList.remove('modal-content');
                 node.classList.add('iconify-modal-content');
+
+                node = node.parentNode;
+                if (node && node.classList) {
+                    node.classList.add('iconify-modal');
+                }
                 break;
             }
         }
