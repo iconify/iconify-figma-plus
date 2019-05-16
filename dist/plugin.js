@@ -1,6 +1,7 @@
 (function() {
     var figmaPlus = window.figmaPlus,
         figma = window.figma,
+        app = window.App,
         plugin = {
             title: "Iconify",
             version: "1.0.0",
@@ -29,7 +30,8 @@
         },
         loading = false,
         loaded = false,
-        lastId = null;
+        lastId = null,
+        lastParent = null;
 
     /**
      * Call done() after test() is successful
@@ -232,6 +234,7 @@
 
         // Remove style
         container.setAttribute('style', '');
+        container.innerHTML = '';
 
         // Replace modal-content class with iconify-modal-content in parent node because
         // modal-content includes styles for child nodes that break layout
@@ -250,18 +253,19 @@
             }
         }
 
+        // Create icon finder
         window.IconifySearch.create(container, {
             // prefix: 'mdi',
             // hidePrefix: true,
             listView: false,
-            append: false,
+            append: true,
             show: true,
             useForm: true,
             showCollections: true,
             footer: {
-                submit: 'Add',
+                submit: 'Add Icon',
                 submit2: 'Add and Close',
-                cancel: 'Close',
+                close: false,
                 transform: true,
                 size: true,
                 hideEmpty: true,
@@ -269,17 +273,18 @@
                 defaultColor: '#000'
             },
             callback: function(event, icon) {
-                // noinspection FallThroughInSwitchStatementJS
                 switch (event) {
                     case 'cancel':
                         closeWindow();
                         return;
 
-                    case 'submit2':
-                        closeWindow();
-
                     case 'submit':
                         addIcon(icon);
+                        return;
+
+                    case 'submit2':
+                        addIcon(icon);
+                        closeWindow();
                 }
             }
         });
@@ -287,21 +292,102 @@
 
     /**
      * Add icon
+     *
      * @param {object} icon
      */
     function addIcon(icon) {
         var svg = generateSVG(icon),
-            node;
+            node, parent, x, y;
 
         if (svg === null) {
             return;
         }
 
+        // Add node
         console.log('Iconify: importing SVG:', svg);
         node = figma.createNodeFromSvg(svg);
-        if (node) {
-            node.name = icon.prefix + (icon.prefix.indexOf('-') === -1 ? '-' : ':') + icon.name;
+        if (!node) {
+            return;
         }
+
+        // Change name
+        console.log('Iconify debug: changing name and saving last node as icLastNode');
+        node.name = icon.prefix + (icon.prefix.indexOf('-') === -1 ? '-' : ':') + icon.name;
+        window.icLastNode = node;
+
+        // Move it to currently selected item
+        if (!figma.currentPage) {
+            return;
+        }
+
+        parent = null;
+        if (figma.currentPage.selection.length) {
+            parent = figma.currentPage.selection[0];
+            switch (parent.type) {
+                case 'GROUP':
+                case 'PAGE':
+                    break;
+
+                default:
+                    parent = parent.parent;
+            }
+
+        }
+        if (!parent) {
+            parent = figma.currentPage;
+        }
+
+        // Move icon to middle of selected group
+        if (lastParent === null || lastParent.node !== parent) {
+            lastParent = {
+                node: parent,
+                offset: 0
+            };
+        }
+
+        // Move to top left corner
+        node.x = parent.x;
+        node.y = parent.y;
+
+        if (parent.width > node.width) {
+            x = Math.floor(parent.width / 2 - node.width);
+            x += lastParent.offset;
+            node.x += x;
+            lastParent.offset += node.width;
+        }
+
+        // Change parent node
+        parent.insertChild(parent.children.length, node);
+
+        // Select node
+        console.log('Iconify debug: changing selection');
+        figma.currentPage.selection = [node];
+    }
+
+    /**
+     * Copy icon to clipboard
+     *
+     * @param icon
+     * @return {boolean}
+     */
+    function copyIcon(icon) {
+        var svg = generateSVG(icon),
+            textarea;
+
+        if (svg === null) {
+            return false;
+        }
+
+        textarea = document.createElement('textarea');
+        textarea.value = svg;
+        document.body.appendChild(textarea);
+
+        textarea.select();
+        document.execCommand('copy');
+
+        document.body.removeChild(textarea);
+
+        return true;
     }
 
     /**
