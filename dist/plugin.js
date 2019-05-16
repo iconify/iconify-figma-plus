@@ -234,7 +234,6 @@
 
         // Remove style
         container.setAttribute('style', '');
-        container.innerHTML = '';
 
         // Replace modal-content class with iconify-modal-content in parent node because
         // modal-content includes styles for child nodes that break layout
@@ -258,14 +257,14 @@
             // prefix: 'mdi',
             // hidePrefix: true,
             listView: false,
-            append: true,
+            append: false,
             show: true,
             useForm: true,
             showCollections: true,
             footer: {
                 submit: 'Add Icon',
                 submit2: 'Add and Close',
-                close: false,
+                close: 'Close',
                 transform: true,
                 size: true,
                 hideEmpty: true,
