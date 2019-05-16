@@ -287,6 +287,13 @@
                 }
             }
         });
+
+        setTimeout(function() {
+            var node = container.querySelector('.is-search-form input');
+            if (node) {
+                node.focus();
+            }
+        }, 100);
     }
 
     /**
