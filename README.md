@@ -6,7 +6,9 @@ Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji an
 
 Figma currently does not support plug-ins.
 
-To install this plug-in you need [https://figmaplus.com](Figma Plus). Figma Plus adds plug-in system to Figma, making it possible to add new functionality to Figma!
+To install this plug-in you need Figma Plus. Figma Plus adds plug-in system to Figma, making it possible to add new functionality to Figma!
+
+See https://figmaplus.com/
 
 ## What is Iconify?
 
@@ -26,7 +28,7 @@ You can browse and search icon sets directly from Figma. No need to copy/paste i
 
 ## Installation
 
-Follow instructions on [https://figmaplus.com](Figma Plus website).
+Follow instructions on Figma Plus website: https://figmaplus.com/
 
 ## Usage
 
