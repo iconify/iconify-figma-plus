@@ -350,8 +350,18 @@
             }
 
             // Move to top left corner
-            node.x = parent ? parent.x : 0;
-            node.y = parent ? parent.y : 0;
+            switch (parent.type) {
+                case 'FRAME':
+                    x = 0;
+                    y = 0;
+                    break;
+
+                default:
+                    x = parent.x;
+                    y = parent.y;
+            }
+            node.x = x;
+            node.y = y;
 
             if (parent.width > node.width) {
                 x = Math.floor(parent.width / 2 - node.width);
