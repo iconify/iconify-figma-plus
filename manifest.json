@@ -6,6 +6,11 @@
   "github": "https://github.com/iconify/iconify-figma-plus",
   "description": "Import MDI, FontAwesome, Jam, EmojiOne and many other icons to Figma document.",
   "instructions": "1. Browse Plugins menu 2. Click 'Iconify'",
+  "images": [
+    "samples/collections-small.png",
+    "samples/noto-small.png",
+    "samples/search1-small.png"
+  ],
   "js": [
     "dist/plugin.js"
   ]
