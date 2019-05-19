@@ -1,4 +1,4 @@
-(function(figma, figmaPlus) {
+(function() {
     var plugin = {
             title: "Iconify",
             version: "1.0.1",
@@ -494,4 +494,4 @@
             }
         }
     });
-})(figma, figmaPlus);
+})();

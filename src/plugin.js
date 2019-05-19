@@ -1,4 +1,4 @@
-(function(figma, figmaPlus) {
+(function() {
     var plugin = {
             title: plugin-manifest.name,
             version: plugin-manifest.version,
@@ -494,4 +494,4 @@
             }
         }
     });
-})(figma, figmaPlus);
+})();
