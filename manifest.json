@@ -1,7 +1,7 @@
 {
   "name": "Iconify",
   "id": "iconify-figma-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Vjacheslav Trushkin",
   "github": "https://github.com/iconify/iconify-figma-plus",
   "description": "Import MDI, FontAwesome, Jam, EmojiOne and many other icons to Figma document.",

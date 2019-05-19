@@ -1,7 +1,7 @@
 (function(figma, figmaPlus) {
     var plugin = {
             title: "Iconify",
-            version: "1.0.0",
+            version: "1.0.1",
             load: {
                 scripts: [
                     {
