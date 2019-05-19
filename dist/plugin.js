@@ -1,8 +1,5 @@
-(function() {
-    var figmaPlus = window.figmaPlus,
-        figma = window.figma,
-        app = window.App,
-        plugin = {
+(function(figma, figmaPlus) {
+    var plugin = {
             title: "Iconify",
             version: "1.0.0",
             load: {
@@ -21,7 +18,7 @@
                     'https://code.iconify.design/search/1/1.0.3/style.css'
                 ],
                 styles: [
-                    ".iconify-modal {\n  background: #f2f2f2; }\n  .iconify-modal .modal-header {\n    background: #fff; }\n\n.iconify-modal-content {\n  user-select: none;\n  cursor: default;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  max-height: calc(100% - 36px);\n  overflow: auto;\n  padding: 16px; }\n  .iconify-modal-content svg {\n    display: inline-block; }\n  .iconify-modal-content a, .iconify-modal-content button {\n    cursor: pointer; }\n  .iconify-modal-content input, .iconify-modal-content textarea {\n    cursor: text; }\n"
+                    ".iconify-modal {\n  background: #f2f2f2;\n}\n\n.iconify-modal .modal-header {\n  background: #fff;\n}\n\n.iconify-modal-content {\n  user-select: none;\n  cursor: default;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  max-height: calc(100% - 36px);\n  overflow: auto;\n  padding: 16px;\n}\n\nsvg {\n  display: inline-block;\n}\n\na, button {\n  cursor: pointer;\n}\n\ninput, textarea {\n  cursor: text;\n}\n"
                 ]
             },
             options: {
@@ -497,5 +494,4 @@
             }
         }
     });
-
-})();
+})(figma, figmaPlus);

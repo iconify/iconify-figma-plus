@@ -1,7 +1,10 @@
 .iconify-modal {
-  background: #f2f2f2; }
-  .iconify-modal .modal-header {
-    background: #fff; }
+  background: #f2f2f2;
+}
+
+.iconify-modal .modal-header {
+  background: #fff;
+}
 
 .iconify-modal-content {
   user-select: none;
@@ -11,10 +14,17 @@
   width: 100%;
   max-height: calc(100% - 36px);
   overflow: auto;
-  padding: 16px; }
-  .iconify-modal-content svg {
-    display: inline-block; }
-  .iconify-modal-content a, .iconify-modal-content button {
-    cursor: pointer; }
-  .iconify-modal-content input, .iconify-modal-content textarea {
-    cursor: text; }
+  padding: 16px;
+}
+
+svg {
+  display: inline-block;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+input, textarea {
+  cursor: text;
+}

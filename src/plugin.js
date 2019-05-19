@@ -1,8 +1,5 @@
-(function() {
-    var figmaPlus = window.figmaPlus,
-        figma = window.figma,
-        app = window.App,
-        plugin = {
+(function(figma, figmaPlus) {
+    var plugin = {
             title: plugin-manifest.name,
             version: plugin-manifest.version,
             load: {
@@ -497,5 +494,4 @@
             }
         }
     });
-
-})();
+})(figma, figmaPlus);
